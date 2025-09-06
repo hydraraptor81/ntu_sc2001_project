@@ -292,7 +292,7 @@ cython_debug/
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 
-# Ruff stuff:
+arr_*.txt# Ruff stuff:
 .ruff_cache/
 
 # PyPI configuration file
@@ -305,3 +305,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+### custom
+arr_*.txt
+sorted_arr_*.txt
