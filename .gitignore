@@ -309,4 +309,6 @@ __marimo__/
 
 ### custom
 arr_*.txt
+*_arr_*.txt
 sorted_arr_*.txt
+*_sorted_arr_*.txt

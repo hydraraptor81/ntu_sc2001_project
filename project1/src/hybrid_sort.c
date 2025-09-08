@@ -11,7 +11,7 @@
 #include <string.h>
 #include <time.h>
 
-#define S 10 // Threshold for switching to insertion sort
+#define S 20 // Threshold for switching to insertion sort
 void merge(int arr[], int l, int m, int r);
 void merge_sort(int arr[], int l, int r);
 void insertion_sort(int arr[], int l, int r);
