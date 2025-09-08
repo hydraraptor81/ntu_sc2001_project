@@ -44,8 +44,7 @@ int main(int argc, char *argv[]) {
     10000, 25000, 50000,
     100000, 250000, 500000,
     1000000, 2500000, 5000000,
-    10000000
-	};
+    10000000};
     
 	int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
 	int num_sets = 30;

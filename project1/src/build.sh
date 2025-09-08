@@ -1,6 +1,18 @@
 #!/bin/bash
-gcc -Ofast -march=native -flto -funroll-loops -fomit-frame-pointer -ffast-math -DNDEBUG mergesort.c -o mergesort
-gcc -Ofast -march=native -flto -funroll-loops -fomit-frame-pointer -ffast-math -DNDEBUG hybrid_sort.c -o hybrid_sort
-gcc -Ofast -march=native -flto -funroll-loops -fomit-frame-pointer -ffast-math -DNDEBUG generate_arr.c -o generate_arr
+gcc -Ofast -march=native -flto=auto -funroll-loops -fomit-frame-pointer \
+    -fno-signed-zeros -fno-trapping-math -ffp-contract=fast \
+    -DNDEBUG -fmerge-all-constants -finline-limit=1000 \
+    -Wno-unused-result \
+    hybrid_sort.c -o ../bin/hybrid_sort
 
+gcc -Ofast -march=native -flto=auto -funroll-loops -fomit-frame-pointer \
+    -fno-signed-zeros -fno-trapping-math -ffp-contract=fast \
+    -DNDEBUG -fmerge-all-constants -finline-limit=1000 \
+    -Wno-unused-result \
+    mergesort.c -o ../bin/mergesort
 
+gcc -Ofast -march=native -flto=auto -funroll-loops -fomit-frame-pointer \
+    -fno-signed-zeros -fno-trapping-math -ffp-contract=fast \
+    -DNDEBUG -fmerge-all-constants -finline-limit=1000 \
+    -Wno-unused-result \
+    generate_arr.c -o ../bin/generate_arr

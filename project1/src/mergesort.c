@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * mergesort.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-06
+ * Date: 2025-09-10
  * 
  * takes an unsorted array and sorts it sequentially using mergesort
  */
@@ -18,41 +18,78 @@ void write_array(const char *filename, int arr[], int size);
 
 static long long comparisons = 0;
 
+const int sizes[] = {
+    1000, 2500, 5000,
+    10000, 25000, 50000,
+    100000, 250000, 500000,
+    1000000, 2500000, 5000000,
+    10000000};
+const int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
+const int num_sets = 30;
+
 int main (int argc, char *argv[]) {
-	if (argc != 2) {
-		fprintf(stderr, "Usage: mergesort arr_<size>.txt");
+	if (argc != 3) {
+		fprintf(stderr, "Usage: %s /path/to/arrays /path/to/sorted\n", argv[0]);
 		return 1;
 	}
 
-	const char *input_filename = argv[1];
-	char output_filename[24];
-	snprintf(output_filename, sizeof(output_filename), "sorted_%s",
-	input_filename);
+	const char *input_dir = argv[1];
+	const char *output_dir = argv[2];
 
-	int *arr = NULL;					
-	int size = parse_array(input_filename, &arr);
+	FILE *csv_file = fopen("mergesort.csv", "w");
+	if (!csv_file) {
+	  	perror("Failed to create results.csv");
+	   return 1;
+	}
+	fprintf(csv_file, "Size,AvgTime,AvgComparisons\n");	
 
-	if (size <= 0) {
-		fprintf(stderr, "Failed to parse array from %s\n", input_filename);
-		return 1;
+	for (int i = 0; i < num_sizes; i++) {
+		int size = sizes[i];
+		double total_time = 0;
+		long long total_comparisons = 0;
+
+		for (int set = 1; set <= num_sets; set++) {
+			char input_file[256];
+			snprintf(input_file, sizeof(input_file), "%s/%d_arr_%d.txt", input_dir,
+			set, size);
+
+			char output_file[256];
+			snprintf(output_file, sizeof(output_file), "%s/sorted_%d_arr_%d.txt", output_dir,
+			set, size);
+
+			int *arr = NULL;					
+			int arr_size = parse_array(input_file, &arr);
+			
+			if (arr_size <= 0) {
+				fprintf(stderr, "Failed to parse %s\n", input_file);
+				continue;
+			}
+
+    		comparisons = 0;
+			struct timespec start, end;
+			clock_gettime(CLOCK_MONOTONIC, &start);
+	
+			merge_sort(arr, 0, arr_size - 1);
+
+			clock_gettime(CLOCK_MONOTONIC, &end);
+			double time_spent = (end.tv_sec - start.tv_sec) +
+            (end.tv_nsec - start.tv_nsec) / 1e9;	
+
+			total_time += time_spent;
+			total_comparisons += comparisons;
+
+			write_array(output_file, arr, arr_size);
+			free(arr);
+
+		printf("Sorted array written to %s\n", output_file);
+    	printf("Time taken: %.9f seconds\n", time_spent);
+    	printf("Number of key comparisons: %lld\n", comparisons);
+		}
+		double avg_time = total_time / num_sets;
+		long long avg_comparisons = total_comparisons / num_sets;
+		fprintf(csv_file, "%d,%.9f,%lld\n", size, avg_time, avg_comparisons);
 	}
 
-    comparisons = 0;
-	struct timespec start, end;
-	clock_gettime(CLOCK_MONOTONIC, &start);
-	
-	merge_sort(arr, 0, size - 1);
-
-	clock_gettime(CLOCK_MONOTONIC, &end);
-	double time_spent = (end.tv_sec - start.tv_sec) +
-                    (end.tv_nsec - start.tv_nsec) / 1e9;	
-	
-	write_array(output_filename, arr, size);
-	free(arr);
-	printf("Sorted array written to %s\n", output_filename);
-    printf("Time taken: %.9f seconds\n", time_spent);
-    printf("Number of key comparisons: %lld\n", comparisons);
-	
 	return 0;
 }
 
@@ -119,10 +156,13 @@ int parse_array(const char *filename, int **arr) {
 		perror("Failed to open input file");
 		return -1;
 	}
-
+	int set = 1;	
 	int expected_size = 1000;
 
-	if (sscanf(filename, "arr_%d.txt", &expected_size) != 1 || 
+	const char *basename = strrchr(filename, '/');
+    basename++; 
+
+	if (sscanf(basename, "%d_arr_%d.txt", &set, &expected_size) != 2 || 
 	expected_size <= 0) {
 		fprintf(stderr, "Invalid filename format." 
 		"Expected format: arr_<size>.txt\n");
