@@ -145,7 +145,7 @@ From the table above there is no specific S that works for any N elements. Howev
 
 ## d) Comparing with original mergesort 
 
-[place holder graph here]
+[put table?]
 [explain the differences briefly]
 
 
