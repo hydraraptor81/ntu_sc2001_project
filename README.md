@@ -128,8 +128,20 @@ Take the ceiling of $$\log_2\left(\frac{N}{S}\right)$$ to find Mergesort depth
 
 We can see that, as S increases, mergesort depth correspondingly decreases at certain transition points. Just before mergesort depth decreases, the preceding increase in size S led to a significant increase in key comparisons and time taken, this is due to the increase in work done by insertion sort with a worst case of $$O(N^2)$$. 
 
-For N=10,000,000 we can see that the most optimal S 39 or 40, the first or second S of a particular mergesort depth, in this case, 19. Thus, we can expect similar behaviors empirically for any value of N.
+For N=10,000,000 we can see that the most optimal S 39 or 40, the first or second S of a particular mergesort depth, in this case, 19. Thus, we can expect similar behaviors empirically for any value of N. 
 
+
+
+| S | Size | AvgTime | AvgComparisons | MergesortDepth | MaxDepth |
+|---|------|---------|----------------|----------------|----------|
+| 56 | 250000 | 0.008287226 | 5292770 | 13 | 18 |
+| 54 | 500000 | 0.016875275 | 11086436 | 14 | 18 |
+| 47 | 1000000 | 0.034217115 | 23175968 | 15 | 19 |
+| 31 | 2500000 | 0.090524674 | 55562133 | 17 | 21 |
+| 22 | 5000000 | 0.183665068 | 116110663 | 18 | 22 |
+| 39 | 10000000 | 0.379073287 | 281103626 | 18 | 23 |
+
+From the table above containing the fastest execution time for N elements, there is no specific S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 4 to 5 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm.
 
 [^data-note]: Each array is generated randomly with a xorshift function, and the data shown takes the average of 30 sets of random arrays generated to minimize any outliers.
 
