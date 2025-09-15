@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * hybrid_sort.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-10
+ * Date: 2025-09-15
  * 
  * Implements mergesort and insertion sort as hybrid algorithm 
  */
@@ -11,7 +11,6 @@
 #include <string.h>
 #include <time.h>
 
-#define S 20 // Threshold for switching to insertion sort
 void merge(int arr[], int l, int m, int r);
 void merge_sort(int arr[], int l, int r);
 void insertion_sort(int arr[], int l, int r);
@@ -19,6 +18,7 @@ int parse_array(const char *filename, int **arr);
 void write_array(const char *filename, int arr[], int size);
 
 static long long comparisons = 0;
+static int S = 20; 						// default S value of 20
 
 const int sizes[] = {
     1000, 2500, 5000,
@@ -26,17 +26,31 @@ const int sizes[] = {
     100000, 250000, 500000,
     1000000, 2500000, 5000000,
     10000000};
+
 const int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
-const int num_sets = 30;
 
 int main (int argc, char *argv[]) {
-	if (argc != 3) {
-		fprintf(stderr, "Usage: %s /path/to/arrays /path/to/sorted\n", argv[0]);
-		return 1;
-	}
+	if (argc < 4 || argc > 5) {
+        fprintf(stderr, "Usage: %s <num_sets> /path/to/arrays /path/to/sorted <S_value>\n", argv[0]);
+        return 1;
+    }
 
-	const char *input_dir = argv[1];
-	const char *output_dir = argv[2];
+    int num_sets = atoi(argv[1]);
+    if (num_sets <= 0) {
+        fprintf(stderr, "num_sets must be a positive integer.\n");
+        return 1;
+    }
+	const char *input_dir = argv[2];
+	const char *output_dir = argv[3];
+
+	S = 20;					// back to default 
+    if (argc == 5) {
+        S = atoi(argv[4]);
+        if (S < 2) {
+            fprintf(stderr, "S must be a positive integer >= 2.\n");
+            return 1;
+        }
+    }
 
 	FILE *csv_file = fopen("hybridsort.csv", "w");
 	if (!csv_file) {
@@ -140,7 +154,6 @@ void merge(int arr[], int l, int m, int r) {
 	free(L);							// free temp subarrays
 	free(R);
 }
-
 void merge_sort(int arr[], int l, int r) {
 	if (r - l + 1 <= S) {				// check if size of subarray = S
 		insertion_sort(arr, l, r);		// call insertion sort 

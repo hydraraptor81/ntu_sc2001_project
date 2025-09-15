@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * generate_arr.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-08
+ * Date: 2025-09-15
  * 
  * Generates arrays with values [1, X] of up to 10M integers in powers of 10
  */
@@ -25,18 +25,24 @@ void init_xorshift();
 int xorshift_rand(int max);
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
-		fprintf(stderr, "Usage: %s <max_value> /path/to/output\n", argv[0]);
+    if (argc != 4) {				// check value amount of arguments
+		fprintf(stderr, "Usage: %s <max_value> <num_sets> /path/to/output\n", argv[0]);
         return 1;
     }
 
-    int max_value = atoi(argv[1]);
+    int max_value = atoi(argv[1]);	// max value x  [1,x]
     if (max_value <= 0) {
         fprintf(stderr, "max_value must be a positive integer.\n");
         return 1;
     }
 
-    const char *dir = argv[2];
+    int num_sets = atoi(argv[2]);	// number of sets of arrays 	
+    if (num_sets <= 0) {			 	
+        fprintf(stderr, "num_sets must be a positive integer.\n");
+        return 1;
+    }
+    const char *dir = argv[3];		// directory
+
     MKDIR(dir);  // On Windows use: _mkdir(dir)
 
 	int sizes[] = {
@@ -46,8 +52,7 @@ int main(int argc, char *argv[]) {
     1000000, 2500000, 5000000,
     10000000};
     
-	int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
-	int num_sets = 30;
+	int num_sizes = sizeof(sizes) / sizeof(sizes[0]);	// calculate number of arrays in a set
     
 	init_xorshift();
 
@@ -61,9 +66,6 @@ int main(int argc, char *argv[]) {
 	            perror("Failed to open file");
 	            continue;
 	        }
-
-	        int buffer_size = size * 10;
-	        setvbuf(file, NULL, _IOFBF, buffer_size);
 
     	    if (fprintf(file, "{ ") < 0) {
         		perror("Failed to write to file");

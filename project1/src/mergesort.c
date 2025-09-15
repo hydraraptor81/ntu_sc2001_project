@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * mergesort.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-10
+ * Date: 2025-09-15
  * 
  * takes an unsorted array and sorts it sequentially using mergesort
  */
@@ -25,20 +25,25 @@ const int sizes[] = {
     1000000, 2500000, 5000000,
     10000000};
 const int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
-const int num_sets = 30;
 
 int main (int argc, char *argv[]) {
-	if (argc != 3) {
-		fprintf(stderr, "Usage: %s /path/to/arrays /path/to/sorted\n", argv[0]);
+	if (argc != 4) {
+		fprintf(stderr, "Usage: %s <num_sets> /path/to/arrays /path/to/sorted\n", argv[0]);
 		return 1;
 	}
 
-	const char *input_dir = argv[1];
-	const char *output_dir = argv[2];
+    int num_sets = atoi(argv[1]);
+    if (num_sets <= 0) {
+        fprintf(stderr, "num_sets must be a positive integer.\n");
+        return 1;
+    }
+
+	const char *input_dir = argv[2];
+	const char *output_dir = argv[3];
 
 	FILE *csv_file = fopen("mergesort.csv", "w");
 	if (!csv_file) {
-	  	perror("Failed to create results.csv");
+	  	perror("Failed to create mergesort.csv");
 	   return 1;
 	}
 	fprintf(csv_file, "Size,AvgTime,AvgComparisons\n");	
@@ -165,7 +170,7 @@ int parse_array(const char *filename, int **arr) {
 	if (sscanf(basename, "%d_arr_%d.txt", &set, &expected_size) != 2 || 
 	expected_size <= 0) {
 		fprintf(stderr, "Invalid filename format." 
-		"Expected format: arr_<size>.txt\n");
+		"Expected format: <set>_arr_<size>.txt\n");
 
 		return 1;
 	}
