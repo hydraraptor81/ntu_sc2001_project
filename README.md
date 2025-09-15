@@ -141,7 +141,13 @@ Fastest execution times, for different amount of N elements.
 | 22 | 5000000 | 0.183665068 | 116110663 | 18 | 22 |
 | 40 | 10000000 | 0.378764288 | 281103626 | 18 | 23 |
 
-From the table above there is no specific S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 4 to 5 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm.
+From the table above there is no specific S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 4 to 5 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm, thus optimal S is any size S that reduces MergesortDepth by 4 to 5.
+
+## d) Comparing with original mergesort 
+
+[place holder graph here]
+[explain the differences briefly]
+
 
 [^data-note]: Each array is generated randomly with a xorshift function, and the data shown takes the average of 30 sets of random arrays generated to minimize any outliers.
 
