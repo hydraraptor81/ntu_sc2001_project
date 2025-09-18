@@ -144,7 +144,10 @@ Fastest execution times, for different amount of N elements.
 From the table above there is no specific S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 4 to 5 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm, thus optimal S is any size S that reduces MergesortDepth by 4 to 5.
 
 ## d) Comparing with original mergesort 
-
+|Algorithm | S | AvgTime | AvgComparisons |
+|-------------------------|---|---------|----------------|
+| Merge and Insertion Sort | 10000000 | 0.379770274 |242218266 |
+| Mergesort | 10000000 | 0.719941997 | 220048063 |
 [place holder graph here]
 [explain the differences briefly]
 
