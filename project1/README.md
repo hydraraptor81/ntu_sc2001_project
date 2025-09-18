@@ -13,18 +13,6 @@ Thus, for $N$ elements and size $S$, there are approximately $\frac{N}{S}$ subar
 
 ## Time complexity (Worst case) for Hybrid algorithm
 
-### For **Insertion Sort:**
-
-Total comparisons for Insertion Sort = $\sum_{k=1}^{S-1} k = 1 + 2 + 3 + \dots + (S-1) = \frac{S(S-1)}{2}$
-
-Work per array is $O(S^2)$ and total work by Insertion Sort for $\frac{N}{S}$ subarrays of size S is:
-
-$$
-\frac{N}{S} \times O(S^2) = O(N S)
-$$
-
-Hence, time complexity is $$O(N S)$$
-
 ### For **Mergesort:**
 
 Let $i$ be the number of iterations of Merge Sort.  
@@ -46,6 +34,18 @@ Total cost = iterations $i \times$ merge cost at every level
 = $N \log_2\left(\frac{N}{S}\right)$
 
 Hence, time complexity is $O\left(N \log \left(\frac{N}{S}\right)\right)$
+
+### For **Insertion Sort:**
+
+Total comparisons for Insertion Sort = $\sum_{k=1}^{S-1} k = 1 + 2 + 3 + \dots + (S-1) = \frac{S(S-1)}{2}$
+
+Work per array is $O(S^2)$ and total work by Insertion Sort for $\frac{N}{S}$ subarrays of size S is:
+
+$$
+\frac{N}{S} \times O(S^2) = O(N S)
+$$
+
+Hence, time complexity is $$O(N S)$$
 
 ### Combined Time Complexity
 
