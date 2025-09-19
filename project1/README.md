@@ -33,7 +33,7 @@ Total cost = iterations $i \times$ merge cost at every level
 = $\log_2\left(\frac{N}{S}\right) \times N$  
 = $N \log_2\left(\frac{N}{S}\right)$
 
-Hence, time complexity is $O\left(N \log \left(\frac{N}{S}\right)\right)$
+Hence, time complexity is $O\left(N \log (N)\right)$
 
 ### For **Insertion Sort:**
 
@@ -45,27 +45,27 @@ $$
 \frac{N}{S} \times O(S^2) = O(N S)
 $$
 
-Hence, time complexity is $$O(N S)$$
+Hence, time complexity is $$O(N)$$
 
 ### Combined Time Complexity
 
-Combining the two time complexities, $O(N S)$ and $O\left(N \log \left(\frac{N}{S}\right)\right)$,  
+Combining the two time complexities, $O(N)$ and $O\left(N \log (N)\right)$,  
 the overall time complexity for the hybrid algorithm is:
 
 $$
-O\left(N S + N \log \left(\frac{N}{S}\right)\right)
+O\left(N + N \log (N)\right)
 $$
 
 
 ## c(i) Plot key comparisons against number of elements N, keeping S = 20 constant[^data-note]
 
 [place holder graph here] 
-[use combined time complexity to explain graph, can plot O(NS + N log (N/S)) and see the trend line]
+[use combined time complexity to explain graph, can plot O(N + N log (N)) and see the trend line]
 
 ## c(ii) Plot key comparisons against value of S, keeping N = 10,000,000[^data-note]
 
 [place holder graph here]
-[use combined time complexity to explain graph, can plot O(NS + N log (N/S)) and see the trend line]
+[use combined time complexity to explain graph, can plot O(N + N log (N)) and see the trend line]
 
 ## c(ii) and c(iii) Finding Optimal S Theoretically[^data-note]
 
@@ -135,19 +135,22 @@ Fastest execution times, for different amount of N elements.
 | S | Size | AvgTime | AvgComparisons | MergesortDepth | MaxDepth |
 |---|------|---------|----------------|----------------|----------|
 | 56 | 250000 | 0.008287226 | 5292770 | 13 | 18 |
-| 54 | 500000 | 0.016875275 | 11086436 | 14 | 18 |
-| 47 | 1000000 | 0.034217115 | 23175968 | 15 | 19 |
-| 31 | 2500000 | 0.090524674 | 55562133 | 17 | 21 |
-| 22 | 5000000 | 0.183665068 | 116110663 | 18 | 22 |
-| 40 | 10000000 | 0.378764288 | 281103626 | 18 | 23 |
+| 54 | 500000 | 0.016875275 | 11086436 | 14 | 19 |
+| 47 | 1000000 | 0.034217115 | 23175968 | 15 | 20 |
+| 31 | 2500000 | 0.090524674 | 55562133 | 17 | 22 |
+| 22 | 5000000 | 0.183665068 | 116110663 | 18 | 23 |
+| 40 | 10000000 | 0.378764288 | 281103626 | 18 | 24 |
 
-From the table above there is no specific S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 4 to 5 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm, thus optimal S is any size S that reduces MergesortDepth by 4 to 5.
+From the table above there is no unique S that works for any N elements. However we can see that when size S reduces MergesortDepth by about 5 to 6 from the MaxDepth of Mergesort it generally leads to the fastest execution of the algorithm, thus optimal S is any size S (32 to 64) that reduces MergesortDepth by 5 to 6, where MaxDepth refers to the depth of Mergesort alone, without using insertion sort.
+
+However empirically, S= [32,64] is not always true, and it is a general guideline, due to difference during runtime S could sometimes deviate slightly from this range, but the general idea still holds.
 
 ## d) Comparing with original mergesort 
 |Algorithm | S | AvgTime | AvgComparisons |
 |-------------------------|---|---------|----------------|
 | Merge and Insertion Sort | 10000000 | 0.379770274 |242218266 |
 | Mergesort | 10000000 | 0.719941997 | 220048063 |
+
 [place holder graph here]
 [explain the differences briefly]
 
