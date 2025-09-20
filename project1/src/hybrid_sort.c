@@ -43,7 +43,7 @@ int main (int argc, char *argv[]) {
 	const char *input_dir = argv[2];	
 	const char *output_dir = argv[3];
 
-	S = 20				// ensure S=20 default
+	S = 20;				// ensure S=20 default
     if (argc == 5) {
         S = atoi(argv[4]);
         if (S < 2) {
