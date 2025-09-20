@@ -23,6 +23,7 @@ Enter the number of sets (e.g., 3): 1
 Generated ..//arrays/1_arr_1000.txt with values in [1, 1000]
 Sorted array written to ..//sorted/sorted_1_arr_1000.txt
 Time taken: 0.000083831 seconds
+Number of key comparisons: 8715
 ...
 Sorted array written to ..//sorted/sorted_1_arr_1000.txt
 Time taken: 0.000040851 seconds
