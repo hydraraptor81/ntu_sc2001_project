@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * mergesort.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-15
+ * Date: 2025-09-20
  * 
  * takes an unsorted array and sorts it sequentially using mergesort
  */
@@ -27,7 +27,7 @@ const int sizes[] = {
 const int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
 
 int main (int argc, char *argv[]) {
-	if (argc != 4) {
+	if (argc != 4) {				// check correct number of args
 		fprintf(stderr, "Usage: %s <num_sets> /path/to/arrays /path/to/sorted\n", argv[0]);
 		return 1;
 	}
@@ -41,27 +41,29 @@ int main (int argc, char *argv[]) {
 	const char *input_dir = argv[2];
 	const char *output_dir = argv[3];
 
-	FILE *csv_file = fopen("mergesort.csv", "w");
+	FILE *csv_file = fopen("mergesort.csv", "w");	// create csv file
 	if (!csv_file) {
 	  	perror("Failed to create mergesort.csv");
 	   return 1;
 	}
-	fprintf(csv_file, "Size,AvgTime,AvgComparisons\n");	
-
+	fprintf(csv_file, "Size,AvgTime,AvgComparisons\n");	// add headers to csv
+	
+	// loop through a particular arr size
 	for (int i = 0; i < num_sizes; i++) {
 		int size = sizes[i];
 		double total_time = 0;
 		long long total_comparisons = 0;
-
+	// loop through a diff arr of same size
 		for (int set = 1; set <= num_sets; set++) {
 			char input_file[256];
+			// write formatted filename to input file
 			snprintf(input_file, sizeof(input_file), "%s/%d_arr_%d.txt", input_dir,
 			set, size);
-
+			// write formatted filename to output file
 			char output_file[256];
 			snprintf(output_file, sizeof(output_file), "%s/sorted_%d_arr_%d.txt", output_dir,
 			set, size);
-
+			// initialize null ptr, and copy array from input file to arr
 			int *arr = NULL;					
 			int arr_size = parse_array(input_file, &arr);
 			
@@ -86,12 +88,15 @@ int main (int argc, char *argv[]) {
 			write_array(output_file, arr, arr_size);
 			free(arr);
 
+		// output logs
 		printf("Sorted array written to %s\n", output_file);
     	printf("Time taken: %.9f seconds\n", time_spent);
     	printf("Number of key comparisons: %lld\n", comparisons);
 		}
+		// take average
 		double avg_time = total_time / num_sets;
 		long long avg_comparisons = total_comparisons / num_sets;
+		// append results into csv file
 		fprintf(csv_file, "%d,%.9f,%lld\n", size, avg_time, avg_comparisons);
 	}
 
@@ -106,6 +111,7 @@ void merge(int arr[], int l, int m, int r) {
 	int *L = malloc(n1 * sizeof(int));	// allocate left subarray
 	int *R = malloc(n2 * sizeof(int));	// allocate right subarray
 
+	// copy left and right subarrays into L and R
 	for (i = 0; i < n1; i++)
 		L[i] = arr[l + i];
 	for (j = 0; j < n2; j++)
@@ -161,12 +167,15 @@ int parse_array(const char *filename, int **arr) {
 		perror("Failed to open input file");
 		return -1;
 	}
+
+	// initialize variables
 	int set = 1;	
 	int expected_size = 1000;
 
-	const char *basename = strrchr(filename, '/');
-    basename++; 
-
+	const char *basename = strrchr(filename, '/');	// find last /
+    basename++; 									// increase ptr by 1
+	
+	// parse set number and size of array
 	if (sscanf(basename, "%d_arr_%d.txt", &set, &expected_size) != 2 || 
 	expected_size <= 0) {
 		fprintf(stderr, "Invalid filename format." 
@@ -174,7 +183,8 @@ int parse_array(const char *filename, int **arr) {
 
 		return 1;
 	}
-	
+
+	// allocate sufficient memory to arr
 	*arr = malloc(expected_size * sizeof(int));
 	if (!*arr) {
 		fclose(file);
@@ -186,6 +196,7 @@ int parse_array(const char *filename, int **arr) {
 
 	int index = 0;
 	int num;
+	// read integer from file
 	while (fscanf(file, "%d", &num) == 1) {
 		(*arr)[index++] = num;
 
@@ -199,6 +210,7 @@ int parse_array(const char *filename, int **arr) {
 
 	fclose(file);
 
+	// check if expected number of elements was successfully read
     if (index != expected_size) {
         fprintf(stderr, "Warning: Expected %d elements, but parsed %d\n", 
 		expected_size, index);
@@ -214,6 +226,7 @@ void write_array(const char *filename, int arr[], int size) {
 		return;
 	}
 
+	// storing sorted array into a file
 	fprintf(file, "{");
 	for (int i = 0; i < size; i++) {
 		fprintf(file, "%d", arr[i]);
