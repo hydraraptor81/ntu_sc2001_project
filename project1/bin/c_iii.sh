@@ -13,7 +13,7 @@ if ! [[ "$S_value" =~ ^[0-9]+$ ]] || [ "$S_value" -lt 2 ]; then
     exit 1
 fi
 
-base_dir="/home/hr/Desktop/NTU/Y2S1/SC2001/Projects/ntu_sc2001_project/project1"
+base_dir="../"
 array_dir="$base_dir/arrays"
 sorted_dir="$base_dir/sorted"
 results_dir="$base_dir/results/c_iii"

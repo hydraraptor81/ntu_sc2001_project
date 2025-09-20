@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 OPT_FLAGS="-Ofast -march=native -mtune=native -flto=auto -funroll-loops"
 gcc $OPT_FLAGS hybrid_sort.c -o ../bin/hybrid_sort
 gcc $OPT_FLAGS mergesort.c -o ../bin/mergesort

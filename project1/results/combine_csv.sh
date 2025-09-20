@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-results_dir="/home/hr/Desktop/NTU/Y2S1/SC2001/Projects/ntu_sc2001_project/project1/results"
+results_dir="../results"
 output_file="$results_dir/combined_c_ii_hybridsort.csv"
 
 echo "S,Size,AvgTime,AvgComparisons" > "$output_file"
