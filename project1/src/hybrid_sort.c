@@ -1,7 +1,7 @@
 /* SC2001 Project 1 Integration of Mergesort & Insertion Sort
  * hybrid_sort.c
  * Authors: Aw Hwee Ren, Eamon Ching Yupeng, Ethan Jared Chong Rui Zhi
- * Date: 2025-09-20
+ * Date: 2025-09-21
  * 
  * Implements mergesort and insertion sort as hybrid algorithm 
  */
@@ -9,7 +9,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+#include <windows.h>
+
+double get_time_in_seconds() {
+    LARGE_INTEGER frequency, time;
+    QueryPerformanceFrequency(&frequency);
+    QueryPerformanceCounter(&time);
+    return (double)time.QuadPart / frequency.QuadPart;
+}
+#else
 #include <time.h>
+double get_time_in_seconds() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec + ts.tv_nsec / 1e9;
+}
+#endif
 
 void merge(int arr[], int l, int m, int r);
 void merge_sort(int arr[], int l, int r);
@@ -84,15 +100,10 @@ int main (int argc, char *argv[]) {
 			}
 
     		comparisons = 0;
-			struct timespec start, end;
-			clock_gettime(CLOCK_MONOTONIC, &start);
-	
+			double start = get_time_in_seconds();	
 			merge_sort(arr, 0, arr_size - 1);
-
-			clock_gettime(CLOCK_MONOTONIC, &end);
-			double time_spent = (end.tv_sec - start.tv_sec) +
-            (end.tv_nsec - start.tv_nsec) / 1e9;	
-
+			double end = get_time_in_seconds();
+			double time_spent = end - start;
 			total_time += time_spent;
 			total_comparisons += comparisons;
 
@@ -203,7 +214,10 @@ int parse_array(const char *filename, int **arr) {
 	int expected_size = 1000;
 
 	const char *basename = strrchr(filename, '/'); // find last /
-    basename++;									   // increase ptr by 1
+	if (!basename)
+    	basename = strrchr(filename, '\\');			// for windows 
+	if (basename)									// for linux
+    	basename++;									// increase ptr by 1
 
 	// parse set number and size of array
 	if (sscanf(basename, "%d_arr_%d.txt", &set, &expected_size) != 2 || 
