@@ -1,12 +1,22 @@
-For Linux/MacOS, make sure you have git, gcc and bash.\
-For Windows, try using WSL, if not you have to modify the source code to handle the file operations.
-
 Clone the repo
 ```
 git clone https://github.com/hydraraptor81/ntu_sc2001_project.git
 ```
 
 ## Project 1: Integration of Merge Sort & Insertion Sort
+
+### For Windows 
+
+I modified the code to handle file operations properly on Windows. You can use the gcc from https://winlibs.com/, I recommend to use winget to install it. Any other C compiler works, but I will use gcc for the purposes of this guide. I used MCF+UCRT, but the other permutations using POSIX/MSVCRT will work as well.
+
+Replace helloworld.c with the correct source file
+```
+gcc -Ofast -march=native -mtune=native -flto=auto -funroll-loops" -o helloworld.c -o helloworld.exe
+.\helloworld.exe
+```
+### For MacOS/Linux
+
+Make sure you have git, gcc and bash.
 
 cd into src, build and run the code
 ```
