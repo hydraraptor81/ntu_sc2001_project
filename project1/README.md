@@ -150,9 +150,6 @@ However empirically, S= [32,64] is not always true, and it is a general guidelin
 | Merge and Insertion Sort | 10000000 | 0.379770274 |242218266 |
 | Mergesort | 10000000 | 0.719941997 | 220048063 |
 
-[place holder graph here]
-[explain the differences briefly]
-
 
 [^data-note]: Each array is generated randomly with a xorshift function, and the data shown takes the average of 30 sets of random arrays generated to minimize any outliers.
 
