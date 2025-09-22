@@ -53,7 +53,7 @@ Combining the two time complexities, $O(N)$ and $O\left(N \log (N)\right)$,
 the overall time complexity for the hybrid algorithm is:
 
 $$
-O\left(N + N \log (N)\right)
+O\left(N \log (N)\right)
 $$
 
 
