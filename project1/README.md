@@ -59,13 +59,12 @@ $$
 
 ## c(i) Plot key comparisons against number of elements N, keeping S = 20 constant[^data-note]
 
-[place holder graph here] 
-[use combined time complexity to explain graph, can plot O(N + N log (N)) and see the trend line]
+![ci_graph](photos/ci.png)
+
 
 ## c(ii) Plot key comparisons against value of S, keeping N = 10,000,000[^data-note]
 
-[place holder graph here]
-[use combined time complexity to explain graph, can plot O(N + N log (N)) and see the trend line]
+![cii_graph](photos/cii.png)
 
 ## c(ii) and c(iii) Finding Optimal S Theoretically[^data-note]
 
@@ -87,7 +86,7 @@ $$
 S = \frac{2}{\ln 2} \approx 2.885
 $$
 
-However, this is not practical as mergesort is $O(N)$ at every level, which fails to take advantage of the more efficient insertion sort for smaller arrays, thus we should find a way to determine an optimal S empirically by varying number of elements N. 
+However, this is not practical as mergesort is $O(N)$ at every level, using such a small S fails to take advantage of the more efficient insertion sort for smaller arrays, thus we should find a way to determine an optimal S empirically by varying number of elements N. 
 
 Truncated data from c(ii)
 
