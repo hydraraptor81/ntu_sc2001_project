@@ -144,12 +144,13 @@ From the table above there is no unique S that works for any N elements. However
 
 However empirically, S= [32,64] is not always true, and it is a general guideline, due to difference during runtime S could sometimes deviate slightly from this range, but the general idea still holds.
 
-## d) Comparing with original mergesort 
-|Algorithm | S | AvgTime | AvgComparisons |
+## d) Comparing with original mergesort, using optimal S = 40
+|Algorithm | Size | AvgTime | AvgComparisons |
 |-------------------------|---|---------|----------------|
 | Merge and Insertion Sort | 10000000 | 0.379770274 |242218266 |
 | Mergesort | 10000000 | 0.719941997 | 220048063 |
 
+A 47% improvement in timing is seen with the hybrid algorithm.
 
 [^data-note]: Each array is generated randomly with a xorshift function, and the data shown takes the average of 30 sets of random arrays generated to minimize any outliers.
 
