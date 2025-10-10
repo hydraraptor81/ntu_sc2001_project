@@ -1,6 +1,9 @@
 #Code for part (a)
 
 import time
+import random
+import string
+import heapq
 
 def dijkstra_matrix_array(V, E, start):
     n_operations = 0
@@ -44,38 +47,6 @@ def dijkstra_matrix_array(V, E, start):
 
     return d, pi, n_operations
 
-'''def main():
-    V = ["A", "B", "C"]
-
-    #E: an adjacency matrix where:
-    #E[i][j] is the weight of edge nodes[i] → nodes[j]
-    #Use 0 on the diagonal (i == j)
-    #Use float('inf') if there is no edge
-    #start: the label of the source node, e.g. "A"
-
-    E = [
-        [0, 2, 5],   #A->A, A->B, A->C
-        [2, 0, 1],   #B->A, B->B, B->C
-        [5, 1, 0],   #C->A, C->B, C->C
-    ]
-    current_time = time.time()
-    d, pi = dijstra_matrix_array(V, E, "A")
-    end_time = time.time()
-    time_taken = end_time - current_time
-    print(V)
-    print(d)
-    print(pi)
-    print(time_taken)
-
-if __name__ == "__main__":
-    main()'''
-
-
-#Code for part (b)
-
-import heapq
-import time
-
 def dijkstra_list_heap(V, E, start):
     n_operations = 0
     d = {node: float('inf') for node in V} #distance to infinity
@@ -105,25 +76,6 @@ def dijkstra_list_heap(V, E, start):
                 n_operations += 1
 
     return d, pi, n_operations
-
-'''def main():
-    V = {"A", "B", "C"}
-    E = {
-        "A": [("B", 2), ("C", 5)],
-        "B": [("A", 2), ("C", 1)],
-        "C": [("A", 5), ("B", 1)]
-    }
-    current_time = time.time()
-    d, pi = dijstra_list_heap(V, E, "A")
-    end_time = time.time()
-    time_taken = end_time - current_time
-    print(V)
-    print(d)
-    print(pi)
-    print(time_taken)'''
-
-import random
-import string
 
 def generate_random_adj_list(num_vertices, num_edges, min_weight=1, max_weight=10):
     if num_edges < num_vertices -1:
@@ -171,7 +123,7 @@ def adj_list_to_matrix(V, E):
     idx = {v: i for i, v in enumerate(V)}
     
     # Initialize n x n matrix with 0 (no edge)
-    matrix = [[0 for _ in range(n)] for _ in range(n)]
+    matrix = [[float('inf') for _ in range(n)] for _ in range(n)]
     
     for u in V:
         u_idx = idx[u]
@@ -181,28 +133,23 @@ def adj_list_to_matrix(V, E):
     
     return V, matrix
 
-
-
-# Example usage:
-# V, E = random_graph_dict(3, 3)
-# print("V =", V)
-# print("E =", E)
-
 def main():
     #test 1: vary |V| for sparse and dense
-    start_v_value = 5
-    interval = 3
+    start_v_value = 50
+    interval = 10
 
     #sparse
+    print("Varying |V| for sparse and dense")
+    print("=====Start of sparse======")
     for i in range(30):
         pass_num = i + 1
-        gen_V, gen_E = generate_random_adj_list(start_v_value, start_v_value - 1)
+        V, E = generate_random_adj_list(start_v_value, start_v_value - 1)
         #part a
         print("Part (a) sparse graph pass {}:".format(pass_num))
-        matrix_V, matrix_E = adj_list_to_matrix(gen_V, gen_E)
-        current_time = time.time()
-        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(gen_V)[0])
-        end_time = time.time()
+        matrix_V, matrix_E = adj_list_to_matrix(V, E)
+        current_time = time.perf_counter()
+        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(V)[0])
+        end_time = time.perf_counter()
         time_taken = end_time - current_time
         #print(a_v)
         #print(a_e)
@@ -210,23 +157,28 @@ def main():
         print("{},{}".format(time_taken, a_n_operations))
         #part b
         print("Part (b) sparse graph pass {}:".format(pass_num))
-        b_v, b_e, b_n_operations = dijkstra_list_heap(gen_V, gen_E, list(gen_V)[0])
+        current_time = time.perf_counter()
+        b_v, b_e, b_n_operations = dijkstra_list_heap(V, E, list(V)[0])
+        end_time = time.perf_counter()
+        time_taken = end_time - current_time
         #print(b_v)
         #print(b_e)
         print("time taken,number of operations")
         print("{},{}".format(time_taken, b_n_operations))
         start_v_value += interval
-
+    print("=====End of sparse======")
     #dense
+
+    print("=====Start of dense======")
     for i in range(30):
         pass_num = i + 1
-        gen_V, gen_E = generate_random_adj_list(start_v_value, (start_v_value * (start_v_value - 1))//2)
+        V, E = generate_random_adj_list(start_v_value, (start_v_value * (start_v_value - 1))//2)
         #part a
         print("Part (a) dense graph pass {}:".format(pass_num))
-        matrix_V, matrix_E = adj_list_to_matrix(gen_V, gen_E)
-        current_time = time.time()
-        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(gen_V)[0])
-        end_time = time.time()
+        matrix_V, matrix_E = adj_list_to_matrix(V, E)
+        current_time = time.perf_counter()
+        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(V)[0])
+        end_time = time.perf_counter()
         time_taken = end_time - current_time
         #print(a_v)
         #print(a_e)
@@ -234,15 +186,18 @@ def main():
         print("{},{}".format(time_taken, a_n_operations))
         #part b
         print("Part (b) dense graph pass {}:".format(pass_num))
-        current_time = time.time()
-        b_v, b_e, b_n_operations = dijkstra_list_heap(gen_V, gen_E, list(gen_V)[0])
-        end_time = time.time()
+        current_time = time.perf_counter()
+        b_v, b_e, b_n_operations = dijkstra_list_heap(V, E, list(V)[0])
+        end_time = time.perf_counter()
         time_taken = end_time - current_time
         #print(a_v)
         #print(a_e)
         print("time taken,number of operations")
         print("{},{}".format(time_taken, b_n_operations))
         start_v_value += interval
+
+    print("=====End of dense======")
+    print("Varying |E| given fixed |V|")
 
     #test 2: vary |E| with a fixed |V|
     fixed_v = 50
@@ -252,13 +207,13 @@ def main():
     e_val = min_e
     for i in range(30):
         pass_num = i + 1
-        gen_V, gen_E = generate_random_adj_list(fixed_v, e_val)
+        V, E = generate_random_adj_list(fixed_v, e_val)
         #part a
         print("Part (a) |V| = 50, |E| = {} graph pass {}:".format(e_val, pass_num))
-        matrix_V, matrix_E = adj_list_to_matrix(gen_V, gen_E)
-        current_time = time.time()
-        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(gen_V)[0])
-        end_time = time.time()
+        matrix_V, matrix_E = adj_list_to_matrix(V, E)
+        current_time = time.perf_counter()
+        a_v, a_e, a_n_operations = dijkstra_matrix_array(matrix_V, matrix_E, list(V)[0])
+        end_time = time.perf_counter()
         time_taken = end_time - current_time
         #print(a_v)
         #print(a_e)
@@ -266,7 +221,10 @@ def main():
         print("{},{}".format(time_taken, a_n_operations))
         #part b
         print("Part (b) |V| = 50, |E| = {} graph pass {}:".format(e_val, pass_num))
-        b_v, b_e, b_n_operations = dijkstra_list_heap(gen_V, gen_E, list(gen_V)[0])
+        current_time = time.perf_counter()
+        b_v, b_e, b_n_operations = dijkstra_list_heap(V, E, list(V)[0])
+        end_time = time.perf_counter()
+        time_taken = end_time - current_time
         #print(b_v)
         #print(b_e)
         print("time taken,number of operations")
