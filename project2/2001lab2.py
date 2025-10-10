@@ -4,6 +4,7 @@ import time
 import random
 import string
 import heapq
+from visualize import visualize_graph
 
 def dijkstra_matrix_array(V, E, start):
     n_operations = 0
@@ -135,15 +136,16 @@ def adj_list_to_matrix(V, E):
 
 def main():
     #test 1: vary |V| for sparse and dense
-    start_v_value = 50
-    interval = 10
+    start_v_value = 5
+    interval = 1
 
     #sparse
     print("Varying |V| for sparse and dense")
     print("=====Start of sparse======")
-    for i in range(30):
+    for i in range(1):
         pass_num = i + 1
         V, E = generate_random_adj_list(start_v_value, start_v_value - 1)
+        visualize_graph(V, E)
         #part a
         print("Part (a) sparse graph pass {}:".format(pass_num))
         matrix_V, matrix_E = adj_list_to_matrix(V, E)
@@ -173,6 +175,7 @@ def main():
     for i in range(30):
         pass_num = i + 1
         V, E = generate_random_adj_list(start_v_value, (start_v_value * (start_v_value - 1))//2)
+        visualize_graph(V, E)
         #part a
         print("Part (a) dense graph pass {}:".format(pass_num))
         matrix_V, matrix_E = adj_list_to_matrix(V, E)
@@ -200,14 +203,15 @@ def main():
     print("Varying |E| given fixed |V|")
 
     #test 2: vary |E| with a fixed |V|
-    fixed_v = 50
-    min_e = 49
+    fixed_v = 5
+    min_e = 4
     max_e = (fixed_v * (fixed_v - 1)) // 2
     interval = (max_e - min_e) // 30
     e_val = min_e
     for i in range(30):
         pass_num = i + 1
         V, E = generate_random_adj_list(fixed_v, e_val)
+        visualize_graph(V, E)
         #part a
         print("Part (a) |V| = 50, |E| = {} graph pass {}:".format(e_val, pass_num))
         matrix_V, matrix_E = adj_list_to_matrix(V, E)
