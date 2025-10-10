@@ -126,21 +126,37 @@ import random
 import string
 
 def generate_random_adj_list(num_vertices, num_edges, min_weight=1, max_weight=10):
-    # Create vertex names as uppercase letters: 'A', 'B', 'C', ...
-    V = [str(i) for i in range(num_vertices)]
-    
+    if num_edges < num_vertices -1:
+        raise ValueError("Not enough edges for a connected graph.")
+
+    #V = [str(i) for i in range(num_vertices)]
+    V = [f"V{i}" for i in range(num_vertices)]
+
     # All possible undirected edges (no self-loops)
     possible_edges = [(V[i], V[j]) for i in range(num_vertices) for j in range(i+1, num_vertices)]
     
     if num_edges > len(possible_edges):
         raise ValueError("Too many edges for the number of vertices.")
     
-    # Randomly choose edges
-    chosen_edges = random.sample(possible_edges, num_edges)
+    vertices = list(range(num_vertices))
+    random.shuffle(vertices)
+    tree_edges = []
+    for i in range(0, num_vertices-1):
+        u, v = vertices[i], vertices[i+1]
+        tree_edges.append((V[u], V[v]))
+
+    remaining = num_edges - (num_vertices-1)
+    other_possible_edges = [e for e in possible_edges if e not in tree_edges]
+    if remaining > len(other_possible_edges):
+        raise ValueError("Too many edges")
+
+    # Randomly fill remaining edges
+    extra_edges = random.sample(other_possible_edges, remaining)
+    all_edges = tree_edges + extra_edges
     
     # Build the adjacency dict
     E = {v: [] for v in V}
-    for u, v in chosen_edges:
+    for u, v in all_edges:
         weight = random.randint(min_weight, max_weight)
         E[u].append((v, weight))
         E[v].append((u, weight))  #undirected => add both ways
