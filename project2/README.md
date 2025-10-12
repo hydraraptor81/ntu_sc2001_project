@@ -35,14 +35,32 @@ w_{30} & w_{31} & w_{32} & 0
 \end{pmatrix}
 $$
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation
+### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation, varying $|V|$
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_a_matrix_sparse_vs_dense_time.png" width="45%" />
     <img src="plots/part_a_matrix_sparse_vs_dense_operations.png" width="45%" />
 </div>
 
+##  Part (b) storing |V| and |E| in an adjacency list, and minimizing heap for priority queue implementation
 
+
+### Theoretical Time Complexity for adjacency matrix and array implementation
+
+
+### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation varying $|V|
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="plots/part_b_heap_sparse_vs_dense_v_time.png" width="45%" />
+    <img src="plots/part_b_heap_sparse_vs_dense_v_operations.png" width="45%" />
+</div>
+
+### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation using a fixed $|V|$ and varying $|E|$
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="plots/part_b_heap_fixed_v_varying_e_time.png" width="45%" />
+    <img src="plots/part_b_heap_fixed_v_varying_e_operations.png" width="45%" />
+</div>
 
 
 
