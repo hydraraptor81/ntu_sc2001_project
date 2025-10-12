@@ -15,6 +15,7 @@ def save_results(
     trial: int, 
     v_value: int, 
     graph_type: str,
+    e_value: int,  # Add this parameter
     V: List[str], 
     E: Dict[str, List[tuple]], 
     matrix_V: List[str], 
@@ -57,8 +58,12 @@ def save_results(
     folder_path = Path("results") / graph_type / f"trial_{trial}"
     folder_path.mkdir(parents=True, exist_ok=True)
 
-    # Filename: V<v_value>_<graph_type>_n<trial>.json
-    filename = f"V{v_value}_{graph_type}_n{trial}.json"
+    # Filename: Consistent with visualization filenames
+    if graph_type == "fixed_v":
+        filename = f"E{e_value}_{graph_type}_n{trial}.json"
+    else:
+        filename = f"V{v_value}_{graph_type}_n{trial}.json"
+
     trial_file = folder_path / filename
 
     try:

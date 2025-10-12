@@ -1,0 +1,39 @@
+{
+  "graph": {
+    "V": [
+      "V0"
+    ],
+    "E": {
+      "V0": []
+    },
+    "matrix_V": [
+      "V0"
+    ],
+    "matrix_E": [
+      [
+        Infinity
+      ]
+    ]
+  },
+  "start_node": "V0",
+  "dijkstra_matrix": {
+    "distances": {
+      "V0": 0
+    },
+    "predecessors": {
+      "V0": null
+    },
+    "operations": 3,
+    "time": 5.35999788553454e-06
+  },
+  "dijkstra_heap": {
+    "distances": {
+      "V0": 0
+    },
+    "predecessors": {
+      "V0": null
+    },
+    "operations": 2,
+    "time": 5.070000042906031e-06
+  }
+}

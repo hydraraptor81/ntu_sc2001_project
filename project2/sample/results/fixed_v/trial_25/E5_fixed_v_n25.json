@@ -1,0 +1,144 @@
+{
+  "graph": {
+    "V": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ],
+    "E": {
+      "V0": [
+        [
+          "V3",
+          8
+        ]
+      ],
+      "V1": [
+        [
+          "V4",
+          5
+        ],
+        [
+          "V2",
+          2
+        ]
+      ],
+      "V2": [
+        [
+          "V4",
+          6
+        ],
+        [
+          "V1",
+          2
+        ]
+      ],
+      "V3": [
+        [
+          "V0",
+          8
+        ],
+        [
+          "V4",
+          10
+        ]
+      ],
+      "V4": [
+        [
+          "V2",
+          6
+        ],
+        [
+          "V1",
+          5
+        ],
+        [
+          "V3",
+          10
+        ]
+      ]
+    },
+    "matrix_V": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ],
+    "matrix_E": [
+      [
+        Infinity,
+        Infinity,
+        Infinity,
+        8,
+        Infinity
+      ],
+      [
+        Infinity,
+        Infinity,
+        2,
+        Infinity,
+        5
+      ],
+      [
+        Infinity,
+        2,
+        Infinity,
+        Infinity,
+        6
+      ],
+      [
+        8,
+        Infinity,
+        Infinity,
+        Infinity,
+        10
+      ],
+      [
+        Infinity,
+        5,
+        6,
+        10,
+        Infinity
+      ]
+    ]
+  },
+  "start_node": "V0",
+  "dijkstra_matrix": {
+    "distances": {
+      "V0": 0,
+      "V1": 23,
+      "V2": 24,
+      "V3": 8,
+      "V4": 18
+    },
+    "predecessors": {
+      "V0": null,
+      "V1": "V4",
+      "V2": "V4",
+      "V3": "V0",
+      "V4": "V3"
+    },
+    "operations": 68,
+    "time": 1.5280002116924152e-05
+  },
+  "dijkstra_heap": {
+    "distances": {
+      "V0": 0,
+      "V1": 23,
+      "V2": 24,
+      "V3": 8,
+      "V4": 18
+    },
+    "predecessors": {
+      "V0": null,
+      "V1": "V4",
+      "V2": "V4",
+      "V3": "V0",
+      "V4": "V3"
+    },
+    "operations": 32,
+    "time": 1.1501000699354336e-05
+  }
+}

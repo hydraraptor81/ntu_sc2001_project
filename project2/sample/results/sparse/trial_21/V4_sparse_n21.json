@@ -1,0 +1,109 @@
+{
+  "graph": {
+    "V": [
+      "V0",
+      "V1",
+      "V2",
+      "V3"
+    ],
+    "E": {
+      "V0": [
+        [
+          "V3",
+          8
+        ],
+        [
+          "V1",
+          5
+        ]
+      ],
+      "V1": [
+        [
+          "V0",
+          5
+        ],
+        [
+          "V2",
+          7
+        ]
+      ],
+      "V2": [
+        [
+          "V1",
+          7
+        ]
+      ],
+      "V3": [
+        [
+          "V0",
+          8
+        ]
+      ]
+    },
+    "matrix_V": [
+      "V0",
+      "V1",
+      "V2",
+      "V3"
+    ],
+    "matrix_E": [
+      [
+        Infinity,
+        5,
+        Infinity,
+        8
+      ],
+      [
+        5,
+        Infinity,
+        7,
+        Infinity
+      ],
+      [
+        Infinity,
+        7,
+        Infinity,
+        Infinity
+      ],
+      [
+        8,
+        Infinity,
+        Infinity,
+        Infinity
+      ]
+    ]
+  },
+  "start_node": "V0",
+  "dijkstra_matrix": {
+    "distances": {
+      "V0": 0,
+      "V1": 5,
+      "V2": 12,
+      "V3": 8
+    },
+    "predecessors": {
+      "V0": null,
+      "V1": "V0",
+      "V2": "V1",
+      "V3": "V0"
+    },
+    "operations": 45,
+    "time": 1.4200002624420449e-05
+  },
+  "dijkstra_heap": {
+    "distances": {
+      "V0": 0,
+      "V1": 5,
+      "V2": 12,
+      "V3": 8
+    },
+    "predecessors": {
+      "V0": null,
+      "V1": "V0",
+      "V2": "V1",
+      "V3": "V0"
+    },
+    "operations": 23,
+    "time": 1.1049996828660369e-05
+  }
+}

@@ -9,7 +9,7 @@ import random
 import heapq
 from visualize import visualize_graph
 from visualize_dijkstra import plot_dijkstra_comparison
-from save_results import save_results
+#from save_results import save_results
 
 def dijkstra_matrix_array(V, E, start):
     n_operations = 0
@@ -92,37 +92,36 @@ def generate_random_adj_list(num_vertices, num_edges, min_weight=1, max_weight=1
     if num_edges > (num_vertices * (num_vertices-1) // 2):
         raise ValueError("Too many edges for the number of vertices.")
 
-    # Ensure all vertices are connected
+    # Generate all possible edges
+    all_possible_edges = []
+    for i in range(num_vertices):
+        for j in range(i+1, num_vertices):
+            all_possible_edges.append((V[i], V[j]))
+
+    random.shuffle(all_possible_edges)
+    selected_edges = set()
+
+    # Create spanning tree
     vertices = list(range(num_vertices))
     random.shuffle(vertices)
-    tree_edges = []
-    for i in range(0, num_vertices-1):
+    for i in range(num_vertices - 1):
         u, v = vertices[i], vertices[i+1]
-        tree_edges.append((V[u], V[v]))
+        if u > v:
+            u, v = v, u
+        selected_edges.add((V[u], V[v]))
 
-    remaining = num_edges - (num_vertices-1)
+    # Add remaining edges
+    for edge in all_possible_edges:
+        if len(selected_edges) >= num_edges:
+            break
+        selected_edges.add(edge)
 
-    extra_edges = set()
-    while len(extra_edges) < remaining:
-        u = random.randint(0, num_vertices-1)
-        v = random.randint(0, num_vertices-1)
-        if u != v and u < v:  # Ensure u < v to avoid duplicates
-            extra_edges.add((V[u], V[v]))
-        elif u != v and u > v:
-            extra_edges.add((V[v], V[u]))
-
-    # Remove duplicates
-    tree_edge_set = set(tree_edges)
-    extra_edges = extra_edges - tree_edge_set
-
-    all_edges = tree_edges + list(extra_edges)
-
-    # adjacency dict
+    # Build adjacency list
     E = {v: [] for v in V}
-    for u, v in all_edges:
+    for u, v in selected_edges:
         weight = random.randint(min_weight, max_weight)
         E[u].append((v, weight))
-        E[v].append((u, weight))  #undirected => add both ways
+        E[v].append((u, weight))                        # undirected
 
     return V, E
 
@@ -155,7 +154,9 @@ def run_algorithm_comparison(V, E, graph_type, v_value, e_value, n_iterations):
         if graph_type != "fixed_v":
             V, E = generate_random_adj_list(v_value, e_value)
         # After generating V, E
-        visualize_graph(V, E, f"V{v_value}_{graph_type}_n{trial}.png", iteration=trial, graph_type=graph_type)
+#            visualize_graph(V, E, f"V{v_value}_{graph_type}_n{trial}.png", iteration=trial, graph_type=graph_type)
+#        else:
+#            visualize_graph(V, E, f"E{e_value}_{graph_type}_n{trial}.png", iteration=trial, graph_type=graph_type)
         # initialize starting
         start_node = list(V)[0]
 
@@ -174,10 +175,11 @@ def run_algorithm_comparison(V, E, graph_type, v_value, e_value, n_iterations):
         trial_b_time = end_time - current_time
         total_b_time += trial_b_time
         total_b_operations += b_operations
-
+    '''
         save_results(
             trial=trial,
             v_value=v_value,
+            e_value=e_value,
             graph_type=graph_type,
             V=V,
             E=E,
@@ -193,7 +195,7 @@ def run_algorithm_comparison(V, E, graph_type, v_value, e_value, n_iterations):
             b_operations=b_operations,
             heap_time=trial_b_time
         )
-
+    '''
     # Compute averages
     avg_a_time = total_a_time / n_iterations
     avg_b_time = total_b_time / n_iterations
@@ -202,7 +204,7 @@ def run_algorithm_comparison(V, E, graph_type, v_value, e_value, n_iterations):
 
     return avg_a_time, avg_b_time, avg_a_ops, avg_b_ops
 
-def main(n_points=5, n_iterations=30, v_interval=1):
+def main(n_points=10, n_iterations=30, v_interval=100):
     results = []
 
     print("Varying |V| for sparse and dense graphs")
@@ -280,7 +282,7 @@ def main(n_points=5, n_iterations=30, v_interval=1):
     print("=====End of dense======")
 
     # Vary |E| with fixed |V|
-    fixed_v = 5
+    fixed_v = 1000
     min_e = fixed_v - 1
     max_e = (fixed_v * (fixed_v - 1)) // 2
     interval_e = (max_e - min_e) // (n_points - 1) if n_points > 1 else 0
