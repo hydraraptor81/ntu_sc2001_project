@@ -1,5 +1,5 @@
-## Project 1: Integration of Merge Sort & Insertion Sort
-# Hybrid Mergesort with Insertion Sort
+# Project 1: Integration of Merge Sort & Insertion Sort
+## Hybrid Mergesort with Insertion Sort
 
 Hybrid algorithm works by calling Merge Sort recursively, until subarrays of size ≤ $S$ are reached.  
 Insertion Sort is used for subarrays of size ≤ $S$, which is efficient for small subarrays.
