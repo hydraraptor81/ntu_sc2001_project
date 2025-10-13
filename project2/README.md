@@ -62,6 +62,11 @@ $$
     <img src="plots/part_b_heap_fixed_v_varying_e_operations.png" width="45%" />
 </div>
 
+### Part (c) Comparison between Adjacency Matrix & Array implementation and Adjacency List & Minimizing Heap implementation
+
+For comparison between the 2 algorithms, we fixed the numbers of vertices to a value of 10000 while varying the number of edges. The algorithms are compared using 2 types of graphs, sparse and dense with the fixed 10000 vertices. The metric of 
+
+For sparse graph, 
 
 
 
