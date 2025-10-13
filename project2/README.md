@@ -78,12 +78,14 @@ In sparse graphs where $E ≈ V$, $O((V + E) log V) ≈ O((V log V)$ for Adjacen
     <img src="plots/part_c_sparse_varying_v_operations.png" width="45%" />
 </div>
 
+
 Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, Adjacency List & Min Heap starts to take longer compared to its Adjacency Matrix & Array counterpart. In dense graphs, $E ≈ V^2$, thus, $O((V + E) log V) ≈ O((V^2 log V)$ for Adjacency List & Minimizing Heap, which is actually worst than $O(V^2)$ for Adjacency Matrix & Array.
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_dense_varying_v_time.png" width="45%" />
     <img src="plots/part_c_dense_varying_v_operations.png" width="45%" />
 </div>
+
 
 We took a look at having a fixed $|V|$ of 10000 to measure the relationship with respect to the number of edges $|E|$. Both algorithms are compared using graphs with increasing density. The minimum number of edges being $|E| = |V| - 1$ and the maxiumum being $|E| = \frac{|V|(|V| - 1)}{2}$ 
 
