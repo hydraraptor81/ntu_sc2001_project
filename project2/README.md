@@ -80,7 +80,7 @@ Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, Ad
     <img src="plots/part_c_dense_varying_v_operations.png" width="45%" />
 </div>
 
-We took a look at having a fixed |V| of 10000 to measure the relationship with respect to the number of edges |E|. Both algorithms are compared using graphs with increasing density. The minimum number of edges being $|E| = |V| - 1$ and the maxiumum being $|E| = \frac{|V|(|V| - 1)}{2}$ 
+We took a look at having a fixed $|V| of 10000 to measure the relationship with respect to the number of edges $|E|. Both algorithms are compared using graphs with increasing density. The minimum number of edges being $|E| = |V| - 1$ and the maxiumum being $|E| = \frac{|V|(|V| - 1)}{2}$ 
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_fixed_v_varying_e_time.png" width="45%" />
