@@ -67,6 +67,7 @@ $$
 Comparing between the 2 algorithms, we made comparisons with increasing |V| for a set of sparse and dense graphs. 
 
 Time complexity for Adjacency List & Minimizing Heap: $O((V + E) log V)$
+
 Time complexity for Adjacency Matrix & Array: $O(V^2)$
 
 As we can see, for sparse graphs, the Adjacency List & Minimizing Heap implementation is significantly faster as compared to the Adjacency Matrix & Array implementation with lower number of vertices. 
