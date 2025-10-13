@@ -64,19 +64,23 @@ $$
 
 ### Part (c) Comparison between Adjacency Matrix & Array implementation and Adjacency List & Minimizing Heap implementation
 
-For comparison between the 2 algorithms, we fixed the numbers of vertices to a value of 10000 while varying the number of edges. The algorithms are compared using 2 types of graphs, sparse and dense with the fixed 10000 vertices. The metric of 
+Comparing between the 2 algorithms, we made comparisons with increasing |V| for a set of sparse and dense graphs. 
 
-For sparse graph, 
+As we can see, for sparse graphs, the Adjacency List & Minimizing Heap implementation is significantly faster as compared to the Adjacency Matrix & Array implementation with lower number of vertices.
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_sparse_varying_v_time.png" width="45%" />
     <img src="plots/part_c_sparse_varying_v_operations.png" width="45%" />
 </div>
 
+Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, Adjacency List & Min Heap starts to take longer compared to its Adjacency Matrix & Array counterpart. 
+
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_dense_varying_v_time.png" width="45%" />
     <img src="plots/part_c_dense_varying_v_operations.png" width="45%" />
 </div>
+
+We took a look at having a fixed |V| of 10000 to measure the relationship with respect to the number of edges |E|. Both algorithms are compared using graphs with increasing density. The minimum number of edges being $|E| = |V| - 1$ and the maxiumum being $|E| = \frac{|V|(|V| - 1)}{2}$ 
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_fixed_v_varying_e_time.png" width="45%" />
