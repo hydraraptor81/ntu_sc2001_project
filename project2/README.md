@@ -48,7 +48,7 @@ $$
 ### Theoretical Time Complexity for adjacency matrix and array implementation
 
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation varying $|V|
+### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation varying $|V|$
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_b_heap_sparse_vs_dense_v_time.png" width="45%" />
