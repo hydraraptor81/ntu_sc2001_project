@@ -68,6 +68,21 @@ For comparison between the 2 algorithms, we fixed the numbers of vertices to a v
 
 For sparse graph, 
 
+<div style="display: flex; justify-content: space-between;">
+    <img src="plots/part_c_sparse_varying_v_time.png" width="45%" />
+    <img src="plots/part_c_sparse_varying_v_operations.png" width="45%" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="plots/part_c_dense_varying_v_time.png" width="45%" />
+    <img src="plots/part_c_dense_varying_v_operations.png" width="45%" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="plots/part_c_fixed_v_varying_e_time.png" width="45%" />
+    <img src="plots/part_c_fixed_v_varying_e_operations.png" width="45%" />
+</div>
+
 
 
 
