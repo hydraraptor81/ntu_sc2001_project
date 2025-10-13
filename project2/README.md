@@ -19,10 +19,12 @@
 
 ### Theoretical Time Complexity for adjacency matrix and array implementation
 
-The algorithm iterates through each vertex to find the next node with the minimum distance, taking $O(|V|)$ time for each vertex.\
-For each vertex it checks all adjacent vertices, with a worst case of $O(|V|)$ in a matrix, Thus overall time complexity is $O(|V|^2)$.
-However, the number of edges $E$ does not affect the time complexity because the adjacency matrix forces the algorithm to go through 
-all $V$ potential neighbors for each vertex, regardless of whether a graph is sparse or dense, it still needs to go through the whole matrix.
+For adjacency matrix and array priority queue implementations of Dijkstra's algorithm, it works by iterating through each vertex to 
+find the next node with the minimum distance, taking $O(|V|)$ time for each vertex as it searches the entire row to find the minimum distance. 
+For each vertex, it checks all adjacent vertices, and in the worst case, this involves scanning up to $|V|$ potential neighbors even if the neighbors are not reacheable.
+Thus number of edges $|E|$ does not contribute to the time complexity.
+Hence, regardless of whether the graph is sparse or dense,the total time complexity is $O(|V|^2)$.  
+This makes the approach less efficient for sparse and moderately dense graphs compared to implementations using adjacency lists and heaps.
 
 ### Example of such a matrix
 
@@ -45,17 +47,22 @@ $$
 ##  Part (b) storing |V| and |E| in an adjacency list, and minimizing heap for priority queue implementation
 
 
-### Theoretical Time Complexity for adjacency matrix and array implementation
+### Theoretical Time Complexity for adjacency list, and minimizing heap for priority queue implementation
 
+The min-heap and adjacency list implementations of Dijkstra's algorithm, it works by iterating through each vertex to find the next node with the minimum distance. 
+Since there are $|V|$ vertices and each pop from the priority queue takes $O(\log |V|)$ time, the total time for all pop operations is $O(|V| \log |V|)$. 
+When traversing each vertex’s neighbors, updating the shortest distance to a node does a push operation to the heap which also takes $O(\log |V|)$ time per operation. 
+In the worst case, all $|E|$ edges are new alternate paths that are shortest each, requiring $|E|$ edges to be pushed leading to a total push time of $O(|E| \log |V|)$. 
+Combining both, the overall time complexity is $O((|V| + |E|) \log |V|)$.
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation varying $|V|$
+### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation varying $|V|$
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_b_heap_sparse_vs_dense_v_time.png" width="45%" />
     <img src="plots/part_b_heap_sparse_vs_dense_v_operations.png" width="45%" />
 </div>
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation using a fixed $|V|$ and varying $|E|$
+### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation using a fixed $|V|$ and varying $|E|$
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_b_heap_fixed_v_varying_e_time.png" width="45%" />
