@@ -71,14 +71,14 @@ Time complexity for Adjacency List & Minimizing Heap: $O((V + E) log V)$
 Time complexity for Adjacency Matrix & Array: $O(V^2)$
 
 As we can see, for sparse graphs, the Adjacency List & Minimizing Heap implementation is significantly faster as compared to the Adjacency Matrix & Array implementation with lower number of vertices. 
-In sparse graphs where $E ≈ V$, $O((V + E) log V) ≈ O((V log V)$ for adj list & heap, which is faster than $O(V^2)$ for adj mat & array.
+In sparse graphs where $E ≈ V$, $O((V + E) log V) ≈ O((V log V)$ for Adjacency List & Minimizing Heap, which is faster than $O(V^2)$ for Adjacency Matrix & Array.
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_sparse_varying_v_time.png" width="45%" />
     <img src="plots/part_c_sparse_varying_v_operations.png" width="45%" />
 </div>
 
-Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, Adjacency List & Min Heap starts to take longer compared to its Adjacency Matrix & Array counterpart. 
+Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, Adjacency List & Min Heap starts to take longer compared to its Adjacency Matrix & Array counterpart. In dense graphs, $E ≈ V^2$, thus, $O((V + E) log V) ≈ O((V^2 log V)$ for Adjacency List & Minimizing Heap, which is actually worst than $O(V^2)$ for Adjacency Matrix & Array.
 
 <div style="display: flex; justify-content: space-between;">
     <img src="plots/part_c_dense_varying_v_time.png" width="45%" />
