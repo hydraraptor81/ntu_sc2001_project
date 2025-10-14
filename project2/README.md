@@ -19,13 +19,15 @@
 
 ### Theoretical Time Complexity for adjacency matrix and array implementation
 
-For adjacency matrix and array priority queue implementations of Dijkstra's algorithm, it works by
-iterating through each vertex to find the next node with the minimum distance, taking $O(|V|)$ time 
-for each vertex as it searches the entire row to find the minimum distance. For each vertex, it 
-checks all adjacent vertices, and in the worst case, this involves scanning up to $|V|$ potential 
-neighbors even if the neighbors are not reacheable. Thus number of edges $|E|$ does not contribute 
-to the time complexity. Hence, regardless of whether the graph is sparse or dense,the total time complexity 
-is $O(|V|^2)$. This makes the approach less efficient for sparse and moderately dense graphs compared to 
+For adjacency matrix and array priority queue implementations of Dijkstra's 
+algorithm, it works by iterating through each vertex to find the next node with
+the minimum distance, taking $O(|V|)$ time for each vertex as it searches the 
+entire row to find the minimum distance. For each vertex, it checks all adjacent 
+vertices, and in the worst case, this involves scanning up to $|V|$ potential 
+neighbors even if the neighbors are not reacheable. Thus number of edges $|E|$ 
+does not contribute to the time complexity. Hence, regardless of whether the 
+graph is sparse or dense,the total time complexity is $O(|V|^2)$. This makes the
+approach less efficient for sparse and moderately dense graphs compared to 
 implementations using adjacency lists and heaps.
 
 ### Example of such a matrix
@@ -46,9 +48,11 @@ $$
     <img src="plots/part_a_matrix_sparse_vs_dense_operations.png" width="45%" />
 </div>
 
-As the number of vertices $|V|$ increases, the execution time grows significantly faster for both sparse and dense 
-graphs due to the $O(|V|^2)$ time complexity. In general, dense graphs take slightly longer to execute, likely 
-due to overhead caused by actual edges, which requires the algorithm to update the shortest distances.
+As the number of vertices $|V|$ increases, the execution time grows 
+significantly faster for both sparse and dense graphs due to the $O(|V|^2)$ time
+complexity. In general, dense graphs take slightly longer to execute, likely due 
+to overhead caused by actual edges, which requires the algorithm to update the 
+shortest distances.
 
 ##  Part (b) storing |V| and |E| in an adjacency list, and minimizing heap for priority queue implementation
 

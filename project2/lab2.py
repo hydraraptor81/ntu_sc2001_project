@@ -204,7 +204,7 @@ def run_algorithm_comparison(V, E, graph_type, v_value, e_value, n_iterations):
 
     return avg_a_time, avg_b_time, avg_a_ops, avg_b_ops
 
-def main(n_points=10, n_iterations=30, v_interval=100):
+def main(n_points=10, n_iterations=30, v_interval=1000):
     results = []
 
     print("Varying |V| for sparse and dense graphs")
@@ -214,7 +214,6 @@ def main(n_points=10, n_iterations=30, v_interval=100):
     v_value = 0
     for n in range(n_points):
         v_value += v_interval
-
 
         # For sparse graphs, e_value = v_value - 1
         avg_a_time, avg_b_time, avg_a_ops, avg_b_ops = run_algorithm_comparison(
@@ -282,7 +281,7 @@ def main(n_points=10, n_iterations=30, v_interval=100):
     print("=====End of dense======")
 
     # Vary |E| with fixed |V|
-    fixed_v = 1000
+    fixed_v = 10000
     min_e = fixed_v - 1
     max_e = (fixed_v * (fixed_v - 1)) // 2
     interval_e = (max_e - min_e) // (n_points - 1) if n_points > 1 else 0
@@ -294,7 +293,7 @@ def main(n_points=10, n_iterations=30, v_interval=100):
         else:
             e_val = min_e + n * interval_e
 
-        # For fixed_v graphs, we need to generate V and E once
+        # For fixed_v graphs, generate V and E once
         V, E = generate_random_adj_list(fixed_v, e_val)
         avg_a_time, avg_b_time, avg_a_ops, avg_b_ops = run_algorithm_comparison(
             V=V, E=E, graph_type="fixed_v", 
