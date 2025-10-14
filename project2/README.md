@@ -97,7 +97,7 @@ $O(|V| \log |V|)$ as edges $|E| = |V|$
 
 
 To investigate how number of edges $|E|$ affect the algorithm, we fixed number 
-of vertices $|V|$ and varied $|E|. When $|E|$ increases, the graphs become more
+of vertices $|V|$ and varied $|E|$. When $|E|$ increases, the graphs become more
 and more dense, until $|E| = \frac{|V|(|V| - 1)}{2}$ is reached, the maxmimum 
 number of edges. Thus we can see that execution times are positively related 
 with number of edges $|E|$ (density) which is in line with the theoretical 
