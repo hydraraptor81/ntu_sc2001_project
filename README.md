@@ -47,9 +47,23 @@ Feel free to adjust the build flags in build.sh\
 Default flags are "-Ofast -march=native -mtune=native -flto=auto -funroll-loops"\
 It does not work on cross platform, remove march and mtune flags if you want the code to run on most platforms the code will be slower without the two flags.
 
+## Project 2: The Dijkstra's algorithm
 
+```
+cd project2
+```
+### Setup local environment and install networkx and matplotlib
+```
+python -m venv lab2_env
+source lab2_env/bin/activate
+pip install --upgrade pip
+pip install networkx matplotlib
+```
 
-
+### Run the code
+```
+python lab2.py
+```
 
 
 
