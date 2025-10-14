@@ -67,7 +67,7 @@ time complexity is $O((|V| + |E|) \log |V|)$.
 
 ### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation varying $|V|$
 
-![dense_varying_v](plots/part_b_heap_sparse_vs_dense_v_time.png.png)
+![dense_varying_v](plots/part_b_heap_sparse_vs_dense_v_time.png)
 
 As the number of vertices |V| increases, execution time grows significantly 
 faster for dense graphs due to the $O(|V|^2 \log |V|)$ time complexity where 
