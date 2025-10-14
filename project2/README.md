@@ -7,8 +7,7 @@
 - A "dense" graph is defined as having edges $|E| = \frac{|V|(|V| - 1)}{2}$.
 - "dense" in this case refers to a complete graph, that is undirected.
 - All timings and "number of operations" in the algorithm are averages from 30 sets of graphs.
-- For all empircal results, we used a **n_operations** counter which accounts for, relexation of edges, finding a new path, heap operations, and outer loop iterations.
-  
+
 ### Example of a sparse and dense graph  
 <div style="display: flex; justify-content: space-between;">
     <img src="sample/graphs/sparse/trial_0/V5_sparse_n0.png" width="45%" />
@@ -43,13 +42,7 @@ $$
 
 ### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation, varying $|V|$
 
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_a_matrix_sparse_vs_dense_time.png" width="45%" />
-    <img src="plots/part_a_matrix_sparse_vs_dense_operations.png" width="45%" />
-</div>
-
-
+![dense_varying_v](plots/part_a_matrix_sparse_vs_dense_time.png)
 As the number of vertices $|V|$ increases, the execution time grows 
 significantly faster for both sparse and dense graphs due to the $O(|V|^2)$ time
 complexity. In general, dense graphs take slightly longer to execute, likely due 
@@ -74,12 +67,7 @@ time complexity is $O((|V| + |E|) \log |V|)$.
 
 ### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation varying $|V|$
 
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_b_heap_sparse_vs_dense_v_time.png" width="45%" />
-    <img src="plots/part_b_heap_sparse_vs_dense_v_operations.png" width="45%" />
-</div>
-
+![dense_varying_v](plots/part_b_heap_sparse_vs_dense_v_time.png.png)
 
 As the number of vertices |V| increases, execution time grows significantly 
 faster for dense graphs due to the $O(|V|^2 \log |V|)$ time complexity where 
@@ -89,12 +77,7 @@ $O(|V| \log |V|)$ as edges $|E| = |V|$
 
 ### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation using a fixed $|V|$ and varying $|E|$
 
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_b_heap_fixed_v_varying_e_time.png" width="45%" />
-    <img src="plots/part_b_heap_fixed_v_varying_e_operations.png" width="45%" />
-</div>
-
+![dense_varying_v](plots/part_b_heap_fixed_v_varying_e_time.png)
 
 To investigate how number of edges $|E|$ affect the algorithm, we fixed number 
 of vertices $|V|$ and varied $|E|$. When $|E|$ increases, the graphs become more
@@ -118,12 +101,7 @@ Array implementation. In sparse graphs where number of edges $E ≈ V$, is small
 and a time complexity of $O((V + E) log V) ≈ O((V log V)$ for Adjacency List & 
 Minimizing Heap, which is faster than $O(V^2)$ for Adjacency Matrix & Array.
 
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_c_sparse_varying_v_time.png" width="45%" />
-    <img src="plots/part_c_sparse_varying_v_operations.png" width="45%" />
-</div>
-
+![dense_varying_v](plots/part_c_sparse_varying_v_time.png)
 
 Next, varying |V| for a set of dense graphs, we can see past around 3000 |V|, 
 Adjacency List & Min Heap starts to take longer compared to its Adjacency Matrix
@@ -146,22 +124,16 @@ Adjacency Matrix & Array.
 | 9000         | 13.9498813493177         | 16.1930489379913      |
 | 10000        | 17.1582578875124         | 19.5359363546595      |
 
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_c_dense_varying_v_time.png" width="45%" />
-    <img src="plots/part_c_dense_varying_v_operations.png" width="45%" />
-</div>
-
+![dense_varying_v](plots/part_c_dense_varying_v_time.png)
 
 We also fixed $|V|$ of 10000 to investigate the relationship with respect to the
 number of edges $|E|$. Both algorithms are compared using graphs with increasing 
 density by varing $|E|$. The minimum number of edges is
 $|E| = |V| - 1$ and the maxiumum is $|E| = \frac{|V|(|V| - 1)}{2}$ 
 
-<div style="display: flex; justify-content: space-between;">
-    <img src="plots/part_c_fixed_v_varying_e_time.png" width="45%" />
-    <img src="plots/part_c_fixed_v_varying_e_operations.png" width="45%" />
-</div>
+
+![dense_varying_v](plots/part_c_fixed_v_varying_e_time.png)
+
 
 We can conclude that for sparse graphs, Dijkstra's algorithm using adjacency 
 list & minimizing heap is significantly faster. As the graph grows denser in 
