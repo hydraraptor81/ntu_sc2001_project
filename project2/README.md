@@ -6,7 +6,7 @@
 - A sparse graph is defined as having edges $|E| = |V| - 1$.
 - A "dense" graph is defined as having edges $|E| = \frac{|V|(|V| - 1)}{2}$.
 - "dense" in this case refers to a complete graph, that is undirected.
-- All timings and "number of operations" in the algorithm are averages from 30 sets of graphs.
+- All timings in the algorithm are averages from 30 sets of graphs.
 
 ### Example of a sparse and dense graph  
 <div style="display: flex; justify-content: space-between;">
@@ -40,7 +40,7 @@ w_{30} & w_{31} & w_{32} & 0
 \end{pmatrix}
 $$
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency matrix and array implementation, varying $|V|$
+### Empirical Results: Comparing Execution Times for adjacency matrix and array implementation, varying $|V|$
 
 ![dense_varying_v](plots/part_a_matrix_sparse_vs_dense_time.png)
 As the number of vertices $|V|$ increases, the execution time grows 
@@ -65,7 +65,7 @@ alternate paths that are shortest each, requiring $|E|$ edges to be pushed
 leading to a total push time of $O(|E| \log |V|)$. Combining both, the overall 
 time complexity is $O((|V| + |E|) \log |V|)$.
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation varying $|V|$
+### Empirical Results: Comparing Execution Times for adjacency list, and minimizing heap for priority queue implementation varying $|V|$
 
 ![dense_varying_v](plots/part_b_heap_sparse_vs_dense_v_time.png)
 
@@ -75,7 +75,7 @@ edges $|E| = |V|^2$. For sparse graphs, the adjacency listand min-heap
 implementation remains efficient when $|V|$ increases, with time complexity of 
 $O(|V| \log |V|)$ as edges $|E| = |V|$
 
-### Empirical Results: Comparing Execution Times and n_operations for adjacency list, and minimizing heap for priority queue implementation using a fixed $|V|$ and varying $|E|$
+### Empirical Results: Comparing Execution Times for adjacency list, and minimizing heap for priority queue implementation using a fixed $|V|$ and varying $|E|$
 
 ![dense_varying_v](plots/part_b_heap_fixed_v_varying_e_time.png)
 
